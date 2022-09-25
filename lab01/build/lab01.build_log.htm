@@ -1,0 +1,142 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: µVision V5.37.0.0
+Copyright (C) 2022 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: Hans Peter, Hochschule, LIC=----
+ 
+Tool Versions:
+Toolchain:       MDK-Lite  Version: 5.37.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCLANG\Bin
+C Compiler:      ArmClang.exe V6.18
+Assembler:       Armasm.exe V6.18
+Linker/Locator:  ArmLink.exe V6.18
+Library Manager: ArmAr.exe V6.18
+Hex Converter:   FromElf.exe V6.18
+CPU DLL:         SARMCM3.DLL V5.37.0.0
+Dialog DLL:      DARMCM1.DLL V1.19.6.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.9.0
+Dialog DLL:      TARMCM1.DLL V1.14.6.0
+ 
+<h2>Project:</h2>
+C:\One Drive\OneDrive - ZHAW\Kurse\SEM5\CT1\ct1\lab01\lab01.uvprojx
+Project File Date:  09/24/2022
+
+<h2>Output:</h2>
+*** Using Compiler 'V6.18', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
+Build target 'Target 1'
+app/main.c(14): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+                display[0] = 0b11000000;
+                             ^
+app/main.c(15): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+                display[1] = 0b11111001;
+                             ^
+app/main.c(16): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+                display[2] = 0b10100100;
+                             ^
+app/main.c(17): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+                display[3] = 0b10110000;
+                             ^
+app/main.c(18): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+                display[4] = 0b10011001;
+                             ^
+app/main.c(19): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+                display[5] = 0b10010010;
+                             ^
+app/main.c(20): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+                display[6] = 0b10000010;
+                             ^
+app/main.c(21): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+                display[7] = 0b11111000;
+                             ^
+app/main.c(22): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+                display[8] = 0b10000000;
+                             ^
+app/main.c(23): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+                display[9] = 0b10010000;
+                             ^
+app/main.c(25): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+                display[10] = 0b10001000;
+                              ^
+app/main.c(27): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+                display[11] = 0b10000011;
+                              ^
+app/main.c(29): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+                display[12] = 0b11000110;
+                              ^
+app/main.c(31): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+                display[13] = 0b10100001;
+                              ^
+app/main.c(33): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+                display[14] = 0b10000110;
+                              ^
+app/main.c(35): warning: binary integer literals are a GNU extension [-Wgnu-binary-literal]
+                display[15] = 0b10001110;
+                              ^
+app/main.c(38): warning: mixing declarations and code is a C99 extension [-Wdeclaration-after-statement]
+                uint8_t val = read_byte(P11_ADDR) & 0x0f;
+                        ^
+17 warnings generated.
+compiling main.c...
+linking...
+Program Size: Code=3652 RO-data=428 RW-data=0 ZI-data=8192  
+".\build\lab01.axf" - 0 Error(s), 17 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: InES
+                https://ennis.zhaw.ch/pack/InES.CTBoard14_DFP.4.0.2.pack
+                InES.CTBoard14_DFP.4.0.2
+                CT Board 14 (STM32F429ZI) Device Support
+   * Component: Startup Version: 4.0.1
+   * Component: FMC Version: 3.0.1
+   * Component: GPIO Version: 4.0.1
+   * Component: PWR Version: 2.2.0
+   * Component: RCC Version: 4.0.1
+
+<h2>Collection of Component include folders:</h2>
+  ./RTE/_Target_1
+  C:/Users/Monster/AppData/Local/Arm/Packs/InES/CTBoard14_DFP/4.0.2/Device/Include
+  C:/Users/Monster/AppData/Local/Arm/Packs/InES/CTBoard14_DFP/4.0.2/Device/Include/m0
+  C:/Users/Monster/AppData/Local/Arm/Packs/InES/CTBoard14_DFP/4.0.2/HAL/Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: InES::Device:Startup:4.0.1
+      Source file:   Device/Source/startup_ctboard.s
+      Source file:   Device/Source/system_ctboard.c
+      Source file:   Device/Source/datainit_ctboard.s
+      Include file:  Device/Include/reg_ctboard.h
+      Include file:  Device/Include/m0/platform_ctboard.h
+      Include file:  Device/Include/reg_stm32f4xx.h
+      Include file:  Device/Include/system_ctboard.h
+
+   * Component: InES::HAL:FMC:3.0.1
+      Include file:  HAL/Include/hal_fmc.h
+      Include file:  Device/Include/reg_stm32f4xx.h
+      Source file:   HAL/Source/hal_fmc.c
+      Include file:  HAL/Include/hal_common.h
+
+   * Component: InES::HAL:GPIO:4.0.1
+      Include file:  HAL/Include/hal_common.h
+      Source file:   HAL/Source/hal_gpio.c
+      Include file:  HAL/Include/hal_gpio.h
+      Include file:  Device/Include/reg_stm32f4xx.h
+
+   * Component: InES::HAL:PWR:2.2.0
+      Source file:   HAL/Source/hal_pwr.c
+      Include file:  Device/Include/reg_stm32f4xx.h
+      Include file:  HAL/Include/hal_common.h
+      Include file:  HAL/Include/hal_pwr.h
+
+   * Component: InES::HAL:RCC:4.0.1
+      Include file:  HAL/Include/hal_common.h
+      Include file:  Device/Include/reg_stm32f4xx.h
+      Source file:   HAL/Source/hal_rcc.c
+      Include file:  HAL/Include/hal_rcc.h
+Build Time Elapsed:  00:00:00
+</pre>
+</body>
+</html>
