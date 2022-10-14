@@ -27,6 +27,8 @@ ADDR_LED_15_8               EQU     0x60000101
 ADDR_LED_23_16              EQU     0x60000102
 ADDR_LED_31_24              EQU     0x60000103
 ADDR_BUTTONS                EQU     0x60000210
+ADDR_DS_1_0                 EQU     0x60000114
+ADDR_DS_3_2                 EQU     0x60000115
 
 BITMASK_KEY_T0              EQU     0x01
 BITMASK_LOWER_NIBBLE        EQU     0x0F
@@ -37,7 +39,7 @@ BITMASK_LOWER_NIBBLE        EQU     0x0F
         AREA MyAsmVar, DATA, READWRITE
 ; STUDENTS: To be programmed
 
-byte_array             SPACE    16 ; reserve 16 byte for the table
+halfword_array             SPACE    32 ; reserve 32 byte for the tabl
 
 
 ; END: To be programmed
@@ -55,57 +57,67 @@ readInput
         BL    waitForKey                    ; wait for key to be pressed and released
 ; STUDENTS: To be programmed
 
-; Addresses are normally expressed as offsets from a label
-        ; https://www.keil.com/support/man/docs/armasm/armasm_dom1359731148124.htm
-        ; Load byte_array address to R0
-        LDR R0, =byte_array
-        ; Load BITMASK_LOWER_NIBBLE address to R4
+		LDR R0, =halfword_array
         LDR R4, =BITMASK_LOWER_NIBBLE
-        ; Load ADDR_DIP_SWITCH_7_0 address to R4
-        LDR R1, =ADDR_DIP_SWITCH_7_0
-        ; Read input value (will be stored later in table)
-        ; Value is stored in R2
-        ; LDRB is used here, because the value at [R1] is only one byte long
-        ; LDRH would load halfword --> 16 bit
-        ; LDR would load word --> 32 bit
-        LDRB R2, [R1]
 
+        ; Read input value (will be stored later in table)
+        LDR R1, =ADDR_DIP_SWITCH_7_0
+        ; Get value from switches and store it in R2
+        LDRB R2, [R1]
         ; Debug: Print input value to LED_7_0
-        ; Load ADDR_LED_7_0 address to R4
         LDR R5, =ADDR_LED_7_0
-        ; Store value of R2 into address in R5
         STRB R2, [R5]
 
         ; Read input index, which will be used to store the data in the table
-        ; Index is stored in R1
-        ; Load ADDR_DIP_SWITCH_15_8 address to R1
         LDR R1, =ADDR_DIP_SWITCH_15_8
-        ; Read input value from R1 address and store it in R1
-        LDRB R1, [R1]
+        ; Get value from switches and store it in R6
+        LDRB R6, [R1]
         ; Mask index register to only 4 bits --> we use 4 bit index
-        ANDS R1, R1, R4
-
+        ANDS R6, R6, R4
+        ; Make byte to halfword by multiplying it with 2
+        ; resp. byteshift to the left
+        LSLS R6, R6, #1
         ; Debug: Print index value to LED_11_8
         LDR R5, =ADDR_LED_15_8
-        STRB R1, [R5]
+        STRB R6, [R5]
 
-        ; Store byte_value R2 at index R1 in table byte_array
-        STRB R2, [R0, R1]
+        ; Store byte_value R2 at index R6 in table halfword_array
+        STRB R2, [R0, R6]
+        ; Temporary register to store the index
+        MOVS R5, R6
+        ; Increment R6 to store the index in the second byte of the half word
+        ADDS R6, R6, #1
+        STRB R5, [R0, R6]
 
         ; Load output index (Here the user defines an index
         ; which will be used to display the table value with the LEDs)
         LDR R1, =ADDR_DIP_SWITCH_31_24
-        LDRB R1, [R1]
-        ANDS R1, R1, R4
-
+        ; Get value from switches and store it in R6
+        LDRB R6, [R1]
+        ; Mask index register to only 4 bits --> we use 4 bit index
+        ANDS R6, R6, R4
+        ; Make byte to halfword by multiplying it with 2
+        ; resp. byteshift to the left
+        LSLS R6, R6, #1
         ; Debug: Print index value to LED_11_8
         LDR R5, =ADDR_LED_31_24
-        STRB R1, [R5]
+        STRB R6, [R5]
 
-        ; Show table value on index R1 on ADDR_LED_23_16
+        ; Show table value on index R6 on ADDR_LED_23_16
         LDR R5, =ADDR_LED_23_16
-        LDRB R7, [R0, R1]
+        LDRB R7, [R0, R6]
         STRB R7, [R5]
+
+        ;7-seg
+        ADDS R6, R6, #1
+        LDRB R6, [R0, R6]
+
+        LDR R1, =ADDR_DS_3_2
+        LDR R2, =ADDR_DS_1_0
+        ; Output index
+        STRB R6, [R1]
+        ; Output value
+        STRB R7, [R2]
 
 ; END: To be programmed
         B       readInput
