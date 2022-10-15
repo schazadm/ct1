@@ -50,7 +50,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\build\</OutputDirectory>
-          <OutputName>table</OutputName>
+          <OutputName>arith_operations</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
@@ -332,8 +332,8 @@
             <useXO>0</useXO>
             <v6Lang>3</v6Lang>
             <v6LangP>3</v6LangP>
-            <vShortEn>1</vShortEn>
-            <vShortWch>1</vShortWch>
+            <vShortEn>0</vShortEn>
+            <vShortWch>0</vShortWch>
             <v6Lto>0</v6Lto>
             <v6WtE>0</v6WtE>
             <v6Rtti>0</v6Rtti>
@@ -386,9 +386,9 @@
           <GroupName>app</GroupName>
           <Files>
             <File>
-              <FileName>table.s</FileName>
+              <FileName>arithm.s</FileName>
               <FileType>2</FileType>
-              <FilePath>.\app\table.s</FilePath>
+              <FilePath>.\app\arithm.s</FilePath>
             </File>
           </Files>
         </Group>
