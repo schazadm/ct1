@@ -38,8 +38,35 @@ main    PROC
 user_prog
         ; STUDENTS: To be programmed
 
-
-
+		; Operand A
+        LDR R0, =ADDR_DIP_SWITCH_15_8
+        ; Get value from switches
+        LDRB R0, [R0]
+		; expand
+		LSLS R0, R0, #24
+		
+		; Operand B
+        LDR R1, =ADDR_DIP_SWITCH_7_0
+        ; Get value from switches
+        LDRB R1, [R1]
+		; expand
+		LSLS R1, R1, #24
+		
+		; Addition A + B
+		ADDS R2, R0, R1
+		; Shift back
+		LSRS R2, R2, #24
+		
+		; Display sum
+		LDR R3, =ADDR_LED_7_0
+        STRB R2, [R3]
+		
+		; Display flags
+		MRS R4, APSR
+		LSRS R4, R4, #24
+		LDR R5, =ADDR_LED_15_8
+        STRB R4, [R5]
+		
 
         ; END: To be programmed
         B       user_prog

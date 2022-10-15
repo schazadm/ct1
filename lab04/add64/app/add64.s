@@ -49,7 +49,9 @@ endless
 
         ; STUDENTS: To be programmed
 
-
+		
+		ADDS R1,R1,R4
+		ADCS R2,R2,R5
 
 
         ; END: To be programmed
