@@ -36,39 +36,54 @@ main    PROC
         EXPORT main
 
 user_prog
-        ; STUDENTS: To be programmed
-
+		
 		; Operand A
         LDR R0, =ADDR_DIP_SWITCH_15_8
         ; Get value from switches
         LDRB R0, [R0]
-		; expand
+		; expand left shift 24bits
 		LSLS R0, R0, #24
-		
+		; ---------------------------------
 		; Operand B
         LDR R1, =ADDR_DIP_SWITCH_7_0
         ; Get value from switches
         LDRB R1, [R1]
-		; expand
+		; expand left shift 24bits
 		LSLS R1, R1, #24
-		
+		; ---------------------------------
+		; ---------------------------------
 		; Addition A + B
 		ADDS R2, R0, R1
-		; Shift back
-		LSRS R2, R2, #24
-		
-		; Display sum
-		LDR R3, =ADDR_LED_7_0
-        STRB R2, [R3]
-		
-		; Display flags
+		; ---------------------------------
+		; Get and display flags
 		MRS R4, APSR
-		LSRS R4, R4, #24
+		LSRS R4, R4, #24 ; shift right to get 1 byte values
 		LDR R5, =ADDR_LED_15_8
-        STRB R4, [R5]
-		
+        STR R4, [R5]
+		; ---------------------------------
+		; ---------------------------------
+		; Subtraction A - B
+		SUBS R3, R0, R1
+		; ---------------------------------
+		; Get and display flags
+		MRS R4, APSR
+		LSRS R4, R4, #24 ; shift right to get 1 byte values
+		LDR R5, =ADDR_LED_31_24
+		STR R4, [R5]
+		; ---------------------------------
+		; ---------------------------------
+		; Display sum
+		LDR R6, =ADDR_LED_7_0
+		LSRS R2, R2, #24 ; shift right to get 1 byte values
+        STR R2, [R6]
+		; ---------------------------------
+		; Display difference
+		LDR R6, =ADDR_LED_23_16
+		LSRS R3, R3, #24 ; shift right to get 1 byte values
+        STR R3, [R6]
+		; ---------------------------------
+		; ---------------------------------
 
-        ; END: To be programmed
         B       user_prog
         ALIGN
 ; ------------------------------------------------------------------
