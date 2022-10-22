@@ -73,11 +73,13 @@ endless
         ; and place the result in R4 and R5.
         ; ADDS    r4, r0, r2    ; adding the least significant words
         ; ADC     r5, r1, r3    ; adding the most significant words
+		MOVS R4, #0
+		
         ADDS R0, R0, R3 ; adding the least significant words
         ; Because we are only adding a 32 bit value to our 64 bit integer
         ; we don't need to add anything to the second part of our integer value
         ; this addds the carry
-        ADCS R1, R1 ; adding the most significant words
+        ADCS R1, R4 ; adding the most significant words
 		; ---------------------------------
 		; ---------------------------------
 		
