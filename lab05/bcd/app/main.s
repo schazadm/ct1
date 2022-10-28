@@ -48,7 +48,7 @@ main    PROC
         export main
             
 		; STUDENTS: To be programmed
-		
+		; Task 1
 		LDR 	R2, =MASK_BIT_CLEAR ; 0xF0
 		
 		; BCD Ones
@@ -89,11 +89,34 @@ calcOneBits
 checkIfZero
         CMP R7, #0
         BNE calcOneBits
-
+		
+		; Task 1 end
+		
+		; Task 2
         ; output one bits to LEDs
         LDR      R7, =ADDR_LED_31_16
         STRH     R5, [R7]
 
+disco_loop
+		LDR R7, =0x10
+		CMP R1, R7 ;check if iterator is 16
+		BEQ disco_loop_ended ;exit loop
+		ADDS R1, R1, #1
+	
+		;duplicate the half word to create a word
+		MOVS R3, R2
+		LSLS R3, R3, #16
+		ORRS R2, R2, R3 ;logical OR to duplicate the values
+	
+		LDR R5, =0x01 ;speed of loop
+		RORS R2, R2, R5
+		LDR R4, =ADDR_LED_31_16
+		STRH  R2, [R4]
+	
+		BL pause
+		B disco_loop
+disco_loop_ended
+		; Task 2 end
 		; END: To be programmed
         B       main
         ENDP
