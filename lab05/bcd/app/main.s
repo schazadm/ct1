@@ -80,22 +80,6 @@ main    PROC
 		
 		MOVS R7, R2
         MOVS R5, #0
-		
-calcOneBits
-        LSRS R7, R7, #1
-        BCS increase
-
-; check if we are done (if r2 == 0)
-checkIfZero
-        CMP R7, #0
-        BNE calcOneBits
-		
-		; Task 1 end
-		
-		; Task 2
-        ; output one bits to LEDs
-        LDR      R7, =ADDR_LED_31_16
-        STRH     R5, [R7]
 
 disco_loop
 		LDR R7, =0x10
@@ -179,13 +163,6 @@ shiftAndAdd
         BX      LR
         ALIGN
 
-increase
-        MOVS R6, #0
-        ADCS R5, R6
-        LSLS R5, #1
-
-        B checkIfZero
-        ALIGN
 ;----------------------------------------------------
 ; pause for disco_lights
 pause           PROC
