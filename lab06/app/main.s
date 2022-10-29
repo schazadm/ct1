@@ -110,35 +110,48 @@ case_switch     ; Implement switch statement as shown on lecture slide
 
 case_0       
                 LDR  R0, =0
-                B    display_result  
+                B    display_result
 
 case_1        
                 ADDS R0, R0, R1
                 B    display_result
-				
 
 ; STUDENTS: To be programmed
 
 case_2
-
+				SUBS R0, R0, R1
+                B    display_result
 case_3
-
+				MULS R0, R1, R0
+                B    display_result
 case_4
-
+				ANDS R0, R0, R1
+                B    display_result
 case_5
-
+				ORRS R0, R0, R1
+                B    display_result
 case_6
-
+				EORS R0, R0, R1
+                B    display_result
 case_7
-
+; invert
+				MVNS R0, R0
+                B    display_result
 case_8
-
+				ANDS R0, R0, R1
+				MVNS R0, R0
+                B    display_result
 case_9
-
+				ORRS R0, R0, R1
+				MVNS R0, R0
+                B    display_result
 case_a
-
+				EORS R0, R0, R1
+				MVNS R0, R0
+                B    display_result
 case_default
-
+				LDR  R0, =0xffff
+                B    display_result
 
 ; END: To be programmed
 
