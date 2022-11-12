@@ -23,6 +23,7 @@
 ; input
 ADDR_DIP_SWITCH_7_0       EQU        0x60000200
 ADDR_BUTTONS              EQU        0x60000210
+MASK_KEY_T0				  EQU		 0x00000001
 
 ; output
 ADDR_LED_31_0             EQU        0x60000100
@@ -79,8 +80,23 @@ main_loop
 ; STUDENTS: To be programmed
 
 
+		LDR R4, =adc_get_value
+		
 
 
+
+
+T0_pressed
+        PUSH    {R0, R1, R2}
+        LDR     R1, =ADDR_BUTTONS               ; laod base address of keys
+        LDR     R2, =MASK_KEY_T0                ; load key mask T0
+        LDRB    R0, [R1]                        ; load key values
+        TST     R0, R2                          ; check, if key T0 is pressed
+		POP     {R0, R1, R2}
+		BX      LR
+		ALIGN
+		
+		
 ; END: To be programmed
         B          main_loop
         
