@@ -61,14 +61,83 @@ operation       PROC
 				; when the function returns
 
                 ; STUDENTS: To be programmed                        
+				
+				; store R0 and R1 to the stack
+				;SUB SP, #16
+				;STR R0, [SP, #0]
+				;STR	R1, [SP, #4]
+				
+				;LDR R4, [SP, #0]
+				
+				; upper multiplier 
+				LDR		R4, =0xFFFF0000
+				ANDS	R4, R4, R0
+				; lower multiplier
+				LDR		R5, =0x0000FFFF
+				ANDS	R5, R5, R0
+				; upper multiplicand 
+				LDR		R6, =0xFFFF0000
+				ANDS	R6, R6, R1
+				; lower multiplicand
+				LDR		R7, =0x0000FFFF
+				ANDS	R7, R7, R1
+				
+				; calc upper
+				MOV		R0, R4
+				MOV		R1, R6
+				BL		operation_mul_u16
+				MOV		R0, R1
+				; calc lower
+				MOV		R0, R5
+				MOV		R1, R7
+				BL		operation_mul_u16
+				
 
-
+				;ADD SP, #16
+				
                 ; END: To be programmed
 
                 POP  {R4-R7,PC}            ; return R0
 				ENDP
 
 				ALIGN
+					
+; -------------------------------------------------------------------
+; 16 bit multiplication
+; - multiplier in R0
+; - multiplicand in R1
+; - 32 bit result in R0
+; -------------------------------------------------------------------
+operation_mul_u16 PROC
+
+				PUSH {R4-R7,LR}
+				; Instruction: do not use high registers in your code, 
+				; or make sure they contain thier original values
+				; when the function returns
+
+                ; STUDENTS: To be programmed                        
+				
+				MOVS 	R4, R0 		; copy multiplier
+				MOVS 	R0, #0x0	; prepare return value
+loop
+				CMP		R4, #0x0	; R4 - 0
+				BEQ 	return		; R4 > 0
+				MOVS	R5, #0x1	; prepare mask for LSB
+				ANDS	R5, R4, R5	; get LSB
+				CMP		R5, #0x0	; R5 - 0
+				BEQ		jmp			; R5 > 0
+				ADDS	R0, R1
+jmp
+				LSLS	R1, #0x1
+				LSRS	R4, #0x1
+				B		loop
+return
+                ; END: To be programmed
+
+                POP  {R4-R7,PC}	; return R0
+                
+				ALIGN
+				ENDP
 
 ; -------------------------------------------------------------------
 ; -- Constants

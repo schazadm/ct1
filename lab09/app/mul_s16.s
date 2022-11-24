@@ -56,7 +56,23 @@ operation       PROC
 
                 ; STUDENTS: To be programmed                        
 
-
+				SXTH	R0, R0		; sign extend multiplier
+				SXTH	R1, R1		; sign extend multiplicand
+				MOVS 	R4, R0 		; copy multiplier
+				MOVS 	R0, #0x0	; prepare return value
+loop
+				CMP		R4, #0x0	; R4 - 0
+				BEQ 	return		; R4 > 0
+				MOVS	R5, #0x1	; prepare mask for LSB
+				ANDS	R5, R4, R5	; get LSB
+				CMP		R5, #0x0	; R5 - 0
+				BEQ		jmp			; R5 > 0
+				ADDS	R0, R1
+jmp
+				LSLS	R1, #0x1
+				LSRS	R4, #0x1
+				B		loop
+return
                 ; END: To be programmed
 
                 POP  {R4-R7,PC}            ; return R0
