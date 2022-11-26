@@ -62,35 +62,57 @@ operation       PROC
 
                 ; STUDENTS: To be programmed                        
 				
-				SUB SP, #8 ; allocate
+				SUB 	SP, #16 		; allocate
 				
 				;STR R0, [SP, #0]
 				;STR R1, [SP, #4]
 				;LDR R4, [SP, #0]
 				
-				; ab * cd
-				; lower multiplier - b
-                UXTH R4, R0
-				; upper multiplier - a
-				LSRS R5, R0, #16
-				; lower multiplicand - d
-				UXTH R6, R1
-				; upper multiplicand - c
-				LSRS R7, R1, #16
-				
+				;;; ab * cd
+                UXTH 	R4, R0 			; lower multiplier - b
+				LSRS 	R5, R0, #16 	; upper multiplier - a
+				UXTH 	R6, R1 			; lower multiplicand - d
+				LSRS 	R7, R1, #16 	; upper multiplicand - c
+	
 				; b*d
 				MOV		R0, R4
 				MOV		R1, R6
 				BL		operation_mul
-				STR		R0, R1
-				
-				; calc lower
+				STR 	R0, [SP, #0]
+				; a*c
 				MOV		R0, R5
 				MOV		R1, R7
 				BL		operation_mul
+				STR 	R0, [SP, #4]
+				; b*c
+				MOV		R0, R4
+				MOV		R1, R7
+				BL		operation_mul
+				STR 	R0, [SP, #8]
+				; a*d
+				MOV		R0, R5
+				MOV		R1, R6
+				BL		operation_mul
+				STR 	R0, [SP, #12]
 				
+				LDR 	R0, [SP, #0] 	; b*d
+				LDR 	R1, [SP, #4] 	; a*c
+				LDR 	R3, [SP, #8] 	; b*c
+				LDR 	R4, [SP, #12] 	; a*d
 
-				ADD SP, #8 ; de-allocate
+				LSLS	R2, R4, #16
+				LSRS	R4, R4, #16
+				
+				ADDS	R0, R2
+				ADCS	R1, R4
+				
+				LSLS	R2, R3, #16
+				LSRS	R3, R3, #16
+				
+				ADDS	R0, R2
+				ADCS	R1, R3
+				
+				ADD 	SP, #16 ; de-allocate
 				
                 ; END: To be programmed
 
