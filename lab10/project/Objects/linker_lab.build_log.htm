@@ -1,0 +1,109 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: µVision V5.37.0.0
+Copyright (C) 2022 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: Hans Peter, ZH, LIC=----
+ 
+Tool Versions:
+Toolchain:       MDK-Lite  Version: 5.37.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCLANG\Bin
+C Compiler:      ArmClang.exe V6.18
+Assembler:       Armasm.exe V6.18
+Linker/Locator:  ArmLink.exe V6.18
+Library Manager: ArmAr.exe V6.18
+Hex Converter:   FromElf.exe V6.18
+CPU DLL:         SARMCM3.DLL V5.37.0.0
+Dialog DLL:      DARMCM1.DLL V1.19.6.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.9.0
+Dialog DLL:      TARMCM1.DLL V1.14.6.0
+ 
+<h2>Project:</h2>
+C:\Workspace\SEM5\CT1\lab10\project\linker_lab.uvprojx
+Project File Date:  12/03/2022
+
+<h2>Output:</h2>
+*** Using Compiler 'V6.18', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
+Rebuild target 'Target 1'
+assembling datainit_ctboard.s...
+assembling startup_ctboard.s...
+compiling write.c...
+compiling toggle.c...
+app/main.c(49): warning: implicit declaration of function 'read8' is invalid in C99 [-Wimplicit-function-declaration]
+        uint8_t buttons = read8(BUTTONS);
+                          ^
+app/main.c(54): warning: implicit declaration of function 'toggle' is invalid in C99 [-Wimplicit-function-declaration]
+            toggle();
+            ^
+2 warnings generated.
+compiling main.c...
+compiling read.c...
+compiling system_ctboard.c...
+compiling hal_fmc.c...
+compiling hal_pwr.c...
+compiling hal_rcc.c...
+compiling hal_gpio.c...
+linking...
+.\Objects\linker_lab.axf: Warning: L6304W: Duplicate input file .\lib_debug_with_src\read_write.lib ignored.
+Program Size: Code=1996 RO-data=428 RW-data=4 ZI-data=8200  
+Finished: 0 information, 1 warning and 0 error messages.
+".\Objects\linker_lab.axf" - 0 Error(s), 3 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: InES
+                https://ennis.zhaw.ch/pack/InES.CTBoard14_DFP.4.0.2.pack
+                InES.CTBoard14_DFP.4.0.2
+                CT Board 14 (STM32F429ZI) Device Support
+   * Component: Startup Version: 4.0.1
+   * Component: FMC Version: 3.0.1
+   * Component: GPIO Version: 4.0.1
+   * Component: PWR Version: 2.2.0
+   * Component: RCC Version: 4.0.1
+
+<h2>Collection of Component include folders:</h2>
+  ./RTE/_Target_1
+  C:/Users/SM/AppData/Local/Arm/Packs/InES/CTBoard14_DFP/4.0.2/Device/Include
+  C:/Users/SM/AppData/Local/Arm/Packs/InES/CTBoard14_DFP/4.0.2/Device/Include/m0
+  C:/Users/SM/AppData/Local/Arm/Packs/InES/CTBoard14_DFP/4.0.2/HAL/Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: InES::Device:Startup:4.0.1
+      Include file:  Device/Include/m0/platform_ctboard.h
+      Include file:  Device/Include/reg_stm32f4xx.h
+      Source file:   Device/Source/datainit_ctboard.s
+      Include file:  Device/Include/system_ctboard.h
+      Source file:   Device/Source/startup_ctboard.s
+      Source file:   Device/Source/system_ctboard.c
+      Include file:  Device/Include/reg_ctboard.h
+
+   * Component: InES::HAL:FMC:3.0.1
+      Include file:  Device/Include/reg_stm32f4xx.h
+      Source file:   HAL/Source/hal_fmc.c
+      Include file:  HAL/Include/hal_common.h
+      Include file:  HAL/Include/hal_fmc.h
+
+   * Component: InES::HAL:GPIO:4.0.1
+      Include file:  Device/Include/reg_stm32f4xx.h
+      Include file:  HAL/Include/hal_gpio.h
+      Include file:  HAL/Include/hal_common.h
+      Source file:   HAL/Source/hal_gpio.c
+
+   * Component: InES::HAL:PWR:2.2.0
+      Source file:   HAL/Source/hal_pwr.c
+      Include file:  HAL/Include/hal_common.h
+      Include file:  HAL/Include/hal_pwr.h
+      Include file:  Device/Include/reg_stm32f4xx.h
+
+   * Component: InES::HAL:RCC:4.0.1
+      Source file:   HAL/Source/hal_rcc.c
+      Include file:  Device/Include/reg_stm32f4xx.h
+      Include file:  HAL/Include/hal_common.h
+      Include file:  HAL/Include/hal_rcc.h
+Build Time Elapsed:  00:00:01
+</pre>
+</body>
+</html>

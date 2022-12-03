@@ -1,0 +1,17 @@
+--cpu Cortex-M0
+".\objects\main.o"
+".\objects\toggle.o"
+".\objects\read.o"
+".\lib_debug_with_src\read_write.lib"
+".\objects\write.o"
+".\objects\datainit_ctboard.o"
+".\objects\startup_ctboard.o"
+".\objects\system_ctboard.o"
+".\objects\hal_fmc.o"
+".\objects\hal_gpio.o"
+".\objects\hal_pwr.o"
+".\objects\hal_rcc.o"
+--ro-base 0x08000000 --entry 0x08000000 --rw-base 0x20000000 --entry Reset_Handler --first __Vectors --strict
+.\lib_debug_with_src\read_write.lib --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\linker_lab.map" -o .\Objects\linker_lab.axf
